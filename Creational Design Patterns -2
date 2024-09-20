@@ -1,0 +1,23 @@
+class DatabaseConnectionPool {
+    private static DatabaseConnectionPool instance;
+
+    private DatabaseConnectionPool() {
+        System.out.println("Creating new Database Connection Pool");
+    }
+
+    public static DatabaseConnectionPool getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnectionPool();
+        }
+        return instance;
+    }
+}
+
+public class SingletonPatternDemo {
+    public static void main(String[] args) {
+        DatabaseConnectionPool pool1 = DatabaseConnectionPool.getInstance();
+        DatabaseConnectionPool pool2 = DatabaseConnectionPool.getInstance();
+
+        System.out.println(pool1 == pool2);  // True
+    }
+}
