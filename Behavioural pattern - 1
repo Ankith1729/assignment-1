@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+import java.util.List;
+
+interface Device {
+    void update(String weather);
+}
+
+class WeatherStation {
+    private List<Device> devices = new ArrayList<>();
+    private String weather;
+
+    public void addDevice(Device device) {
+        devices.add(device);
+    }
+
+    public void removeDevice(Device device) {
+        devices.remove(device);
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+        notifyDevices();
+    }
+
+    private void notifyDevices() {
+        for (Device device : devices) {
+            device.update(weather);
+        }
+    }
+}
+
+class Smartphone implements Device {
+    @Override
+    public void update(String weather) {
+        System.out.println("Smartphone received weather update: " + weather);
+    }
+}
+
+class Smartwatch implements Device {
+    @Override
+    public void update(String weather) {
+        System.out.println("Smartwatch received weather update: " + weather);
+    }
+}
+
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        WeatherStation station = new WeatherStation();
+        Device phone = new Smartphone();
+        Device watch = new Smartwatch();
+
+        station.addDevice(phone);
+        station.addDevice(watch);
+        station.setWeather("Sunny");
+    }
+}
