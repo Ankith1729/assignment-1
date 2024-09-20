@@ -1,0 +1,37 @@
+abstract class Pizza {
+    abstract void prepare();
+}
+
+class CheesePizza extends Pizza {
+    @Override
+    void prepare() {
+        System.out.println("Preparing Cheese Pizza");
+    }
+}
+
+class PepperoniPizza extends Pizza {
+    @Override
+    void prepare() {
+        System.out.println("Preparing Pepperoni Pizza");
+    }
+}
+
+class PizzaFactory {
+    public Pizza createPizza(String type) {
+        if (type.equals("cheese")) {
+            return new CheesePizza();
+        } else if (type.equals("pepperoni")) {
+            return new PepperoniPizza();
+        } else {
+            return null;
+        }
+    }
+}
+
+public class FactoryMethodPatternDemo {
+    public static void main(String[] args) {
+        PizzaFactory factory = new PizzaFactory();
+        Pizza pizza = factory.createPizza("cheese");
+        pizza.prepare();
+    }
+}
